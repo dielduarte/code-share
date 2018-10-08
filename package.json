@@ -1,9 +1,13 @@
 {
   "name": "code-share",
-  "displayName": "code-share",
-  "description": "an extension to share your project or especific file from vscode to world",
+  "displayName": "Code Share",
+  "description": "An extension to share your project or especific file from vscode to world",
   "version": "0.0.1",
   "publisher": "code-share",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dielduarte/code-share"
+  },
   "engines": {
     "vscode": "^1.27.0"
   },
