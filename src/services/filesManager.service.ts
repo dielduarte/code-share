@@ -2,14 +2,12 @@ import * as fs from 'fs';
 import * as vscode from 'vscode';
 
 import { config } from './../resources/config';
+import { IFiles } from 'codesandbox-import-utils/lib/api/define';
 
 const pathsToIgnore: Array<String> = ['node_modules'];
 
 export class FilesManager {
-  static getFiles(
-    dirname?: string,
-    allFiles?: { [file: string]: { content: string } }
-  ) {
+  static getFiles(dirname?: string, allFiles?: IFiles) {
     try {
       const dir = dirname ? dirname : vscode.workspace.rootPath || '';
       const files = fs.readdirSync(dir);
@@ -31,7 +29,8 @@ export class FilesManager {
           })
         );
 
-        _allFiles[path] = { content };
+        //TODO check if the file is binary
+        _allFiles[path] = { content, isBinary: false };
       }
 
       return _allFiles;
