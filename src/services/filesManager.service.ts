@@ -4,10 +4,10 @@ import * as vscode from 'vscode';
 import { config } from './../resources/config';
 import { IFiles } from 'codesandbox-import-utils/lib/api/define';
 
-const pathsToIgnore: Array<String> = ['node_modules'];
+const pathsToIgnore: Array<String> = ['node_modules', '.git'];
 
 export class FilesManager {
-  static getFiles(dirname?: string, allFiles?: IFiles) {
+  static getFiles(dirname?: string, allFiles?: IFiles, directoryName?: string) {
     try {
       const dir = dirname ? dirname : vscode.workspace.rootPath || '';
       const files = fs.readdirSync(dir);
@@ -19,18 +19,19 @@ export class FilesManager {
         if (pathsToIgnore.includes(file)) continue;
 
         if (fs.statSync(path).isDirectory()) {
-          this.getFiles(path, _allFiles);
+          this.getFiles(path, _allFiles, file);
           continue;
         }
 
-        const content = JSON.stringify(
-          fs.readFileSync(path, {
-            encoding: config.defaultEncondig,
-          })
-        );
+        const content = fs.readFileSync(path, {
+          encoding: config.defaultEncondig,
+        });
 
-        //TODO check if the file is binary
-        _allFiles[path] = { content, isBinary: false };
+        //TODO: refactor this code
+        _allFiles[`${directoryName ? directoryName + '/' : ''}${file}`] = {
+          content,
+          isBinary: false,
+        };
       }
 
       return _allFiles;

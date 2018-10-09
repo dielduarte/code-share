@@ -4,7 +4,6 @@ import { FilesManager } from '../filesManager.service';
 import { Http } from './../http.service';
 import { UtilsService } from './../utils.service';
 import { CodeSandBoxApi } from './definitions/codeSandBox.api.interface';
-import { getParameters } from 'codesandbox/lib/api/define';
 
 const SANDBOX_ID = 'sandbox_id';
 
@@ -20,8 +19,6 @@ export class CodeSandBox implements ShareService {
     }
 
     const parameterApi: any = { files: { ...projectFiles } };
-
-    // console.log(parameterApi);
 
     Http.post<CodeSandBoxApi>(this.apiUrl, parameterApi)
       .then(response => {
