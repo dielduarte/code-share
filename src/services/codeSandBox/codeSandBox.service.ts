@@ -14,7 +14,7 @@ export class CodeSandBox implements ShareService {
   public shareProject(): void | boolean {
     const files = FilesManager.getFiles();
     if (!files) {
-      UtilsService.showMessage('no files found. please, try again.');
+      UtilsService.showMessage('No files found. Please, try again.');
 
       return;
     }
