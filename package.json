@@ -32,12 +32,14 @@
     "watch": "tsc -watch -p ./",
     "postinstall": "node ./node_modules/vscode/bin/install",
     "test": "npm run compile && node ./node_modules/vscode/bin/test",
-    "prettier": "prettier --write ./src/**/*.ts"
+    "prettier": "prettier --write ./src/**/*.ts",
+    "lint": "tslint -c tslint.json './src/**/*.ts' --fix"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.42",
     "@types/node": "^8.10.25",
-    "tslint": "^5.8.0",
+    "husky": "^1.1.1",
+    "tslint": "^5.11.0",
     "typescript": "^3.1.1",
     "vscode": "^1.1.21"
   },
@@ -48,5 +50,8 @@
     "fast-memoize": "^2.5.1",
     "fs": "0.0.1-security",
     "path": "^0.12.7"
+  },
+  "husky": {
+    "pre-push": "npm run lint"
   }
 }
