@@ -25,7 +25,9 @@ export class UtilsService {
 
     return currentPathSplited
       .filter(fileName => {
-        if (rootPathSplited) return !rootPathSplited.includes(fileName);
+        if (rootPathSplited) {
+          return !rootPathSplited.includes(fileName);
+        }
 
         return false;
       })
