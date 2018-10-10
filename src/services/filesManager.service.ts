@@ -1,18 +1,42 @@
 import * as fs from 'fs';
-import * as path from 'path';
 import * as vscode from 'vscode';
 
 import { config } from './../resources/config';
-import { PackageJson } from './definitions/packageJson.interface';
+import { IFiles } from 'codesandbox-import-utils/lib/api/define';
+import { UtilsService } from './utils.service';
+
+const pathsToIgnore: Array<String> = ['node_modules', '.git'];
+const projectFiles: IFiles = {};
 
 export class FilesManager {
-  static get PackageJson(): PackageJson {
-    const packageJsonPath = path.join(
-      vscode.workspace.rootPath || '',
-      config.packageJson
-    );
-    return JSON.parse(
-      fs.readFileSync(packageJsonPath, { encoding: config.defaultEncondig })
-    );
+  static getFiles(relativePath?: string) {
+    try {
+      const rootPath = vscode.workspace.rootPath;
+
+      const dir = relativePath ? relativePath : rootPath || '';
+      const files = fs.readdirSync(dir);
+
+      for (const file of files) {
+        const path = dir + '/' + file;
+
+        if (pathsToIgnore.includes(file)) continue;
+
+        if (fs.statSync(path).isDirectory()) {
+          this.getFiles(path);
+          continue;
+        }
+
+        const content = fs.readFileSync(path, {
+          encoding: config.defaultEncondig,
+        });
+
+        const finalPath = UtilsService.getFinalPath(path, rootPath);
+        projectFiles[finalPath] = { content, isBinary: false };
+      }
+
+      return projectFiles;
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
