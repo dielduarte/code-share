@@ -15,4 +15,20 @@ export class UtilsService {
   static showMessage(message: string) {
     vscode.window.showInformationMessage(message);
   }
+
+  static getFinalPath(
+    currentPath: string,
+    rootPath: string | undefined
+  ): string {
+    const currentPathSplited = currentPath.split('/');
+    const rootPathSplited = rootPath && rootPath.split('/');
+
+    return currentPathSplited
+      .filter(fileName => {
+        if (rootPathSplited) return !rootPathSplited.includes(fileName);
+
+        return false;
+      })
+      .join('/');
+  }
 }

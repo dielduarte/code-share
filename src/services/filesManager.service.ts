@@ -3,15 +3,18 @@ import * as vscode from 'vscode';
 
 import { config } from './../resources/config';
 import { IFiles } from 'codesandbox-import-utils/lib/api/define';
+import { UtilsService } from './utils.service';
 
 const pathsToIgnore: Array<String> = ['node_modules', '.git'];
+const projectFiles: IFiles = {};
 
 export class FilesManager {
-  static getFiles(dirname?: string, allFiles?: IFiles, directoryName?: string) {
+  static getFiles(relativePath?: string) {
     try {
-      const dir = dirname ? dirname : vscode.workspace.rootPath || '';
+      const rootPath = vscode.workspace.rootPath;
+
+      const dir = relativePath ? relativePath : rootPath || '';
       const files = fs.readdirSync(dir);
-      const _allFiles = allFiles || {};
 
       for (const file of files) {
         const path = dir + '/' + file;
@@ -19,7 +22,7 @@ export class FilesManager {
         if (pathsToIgnore.includes(file)) continue;
 
         if (fs.statSync(path).isDirectory()) {
-          this.getFiles(path, _allFiles, file);
+          this.getFiles(path);
           continue;
         }
 
@@ -27,14 +30,11 @@ export class FilesManager {
           encoding: config.defaultEncondig,
         });
 
-        //TODO: refactor this code
-        _allFiles[`${directoryName ? directoryName + '/' : ''}${file}`] = {
-          content,
-          isBinary: false,
-        };
+        const finalPath = UtilsService.getFinalPath(path, rootPath);
+        projectFiles[finalPath] = { content, isBinary: false };
       }
 
-      return _allFiles;
+      return projectFiles;
     } catch (e) {
       console.log(e);
     }
