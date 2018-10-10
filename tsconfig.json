@@ -3,6 +3,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es5",
+    "sourceMap": true,
     "outDir": "out",
     "lib": ["dom", "es7"],
     "rootDir": "src",

@@ -31,6 +31,7 @@ export class CodeSandBox implements ShareService {
         UtilsService.showMessage(
           'Something bad happened trying to create the project. Please, try again.'
         );
+        UtilsService.showMessage(err.message);
       });
   }
 }
