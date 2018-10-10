@@ -52,6 +52,8 @@
     "path": "^0.12.7"
   },
   "husky": {
-    "pre-push": "npm run lint"
+    "hooks": {
+      "pre-push": "npm run lint"
+    }
   }
 }
