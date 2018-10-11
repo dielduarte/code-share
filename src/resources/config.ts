@@ -5,4 +5,5 @@ export const config = {
     apiUrl: 'https://codesandbox.io/api/v1/sandboxes/define?json=1',
     shareUrl: 'https://codesandbox.io/s/',
   },
+  ignore: ['node_modules', '.git'],
 };
