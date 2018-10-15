@@ -4,14 +4,20 @@ import { CodeSandBox } from './services/codeSandBox/codeSandBox.service';
 
 export function activate(context: vscode.ExtensionContext) {
   console.log('Congratulations, your extension "code-share" is now active!');
-  let disposable = vscode.commands.registerCommand(
+  let shareProject = vscode.commands.registerCommand(
     'codeshare.shareProject',
     () => {
       const shareService = new CodeSandBox();
       shareService.shareProject();
     }
   );
-  context.subscriptions.push(disposable);
+  let shareFile = vscode.commands.registerCommand('codeshare.shareFile', () => {
+    const shareService = new CodeSandBox();
+    shareService.shareFile();
+  });
+
+  context.subscriptions.push(shareProject);
+  context.subscriptions.push(shareFile);
 }
 
 export function deactivate() {}

@@ -16,6 +16,10 @@ export class UtilsService {
     vscode.window.showInformationMessage(message);
   }
 
+  static setStatusBarMessage(message: string) {
+    vscode.window.setStatusBarMessage(message);
+  }
+
   static getFinalPath(
     currentPath: string,
     rootPath: string | undefined
