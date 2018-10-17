@@ -15,7 +15,8 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:codeshare.shareProject"
+    "onCommand:codeshare.shareProject",
+    "onCommand:codeshare.shareFile"
   ],
   "main": "./out/extension",
   "contributes": {
@@ -23,6 +24,10 @@
       {
         "command": "codeshare.shareProject",
         "title": "Share Project - CodeSandBox"
+      },
+      {
+        "command": "codeshare.shareFile",
+        "title": "Share Current File - CodeSandBox"
       }
     ]
   },
