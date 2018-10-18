@@ -1,4 +1,4 @@
-![CODE SHARE](./logo.jpeg)
+<img src="./images/code-share.svg" width="100%" height="200px" />
 
 # Code Share
 
@@ -10,8 +10,8 @@ Do you like it? Help us, open a PR :)
 
 # Share the entire project
 
-![Share your project](./share_project.gif)
+![Share your project](images/share_project.gif)
 
 ## Share file
 
-![Share your current file](./share_file.gif)
+![Share your current file](images/share_file.gif)
