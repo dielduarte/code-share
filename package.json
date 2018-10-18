@@ -1,8 +1,8 @@
 {
   "name": "code-share",
   "displayName": "Code Share",
-  "description": "An extension to share your project or especific file from vscode to world",
-  "version": "0.0.2",
+  "description": "An extension to share your project or especific file from vscode with the world",
+  "version": "0.0.4",
   "publisher": "code-share",
   "icon": "images/logo-vs.png",
   "repository": {
