@@ -2,8 +2,16 @@
   "name": "code-share",
   "displayName": "Code Share",
   "description": "An extension to share your project or especific file from vscode with the world",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "publisher": "code-share",
+  "tags": [
+    "share",
+    "code",
+    "collaboration",
+    "sandbox",
+    "remote",
+    "co-debug"
+  ],
   "icon": "images/logo-vs.png",
   "repository": {
     "type": "git",
