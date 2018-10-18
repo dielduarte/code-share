@@ -2,8 +2,9 @@
   "name": "code-share",
   "displayName": "Code Share",
   "description": "An extension to share your project or especific file from vscode to world",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "code-share",
+  "icon": "images/logo-vs.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/dielduarte/code-share"
