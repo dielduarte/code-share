@@ -1,3 +1,5 @@
+import uploadFiles from 'codesandbox/lib/utils/parse-sandbox/upload-files';
+
 import { config } from '../../resources/config';
 import { ShareService } from '../definitions/shareServices.interface';
 import { FilesManager } from '../filesManager.service';
@@ -10,17 +12,16 @@ const SANDBOX_ID = 'sandbox_id';
 export class CodeSandBox implements ShareService {
   private apiUrl: string = config.codeSandBox.apiUrl;
 
-  public shareProject(): void | boolean {
-    const projectFiles = FilesManager.getFiles();
-    if (!projectFiles) {
-      UtilsService.showMessage('No files found. Please, try again.');
-
-      return;
-    }
-
-    const parameterApi: any = { files: { ...projectFiles } };
-
-    this.sendToCodeSandbox(parameterApi);
+  public async shareProject() {
+    FilesManager.getFiles().then(files => {
+      if (files && files.files) {
+        uploadFiles(files.uploads).then(resultUpload => {
+          this.sendToCodeSandbox(files);
+        });
+      } else {
+        UtilsService.showMessage('No files found. Please, try again.');
+      }
+    });
   }
 
   public shareFile(): void | boolean {
@@ -51,7 +52,7 @@ export class CodeSandBox implements ShareService {
         `${config.codeSandBox.shareUrl}${response.data[SANDBOX_ID]}`
       );
     } catch (err) {
-      console.log(err);
+      throw Error(err);
       UtilsService.showMessage(
         'Something bad happened trying to create the project. Please, try again.'
       );
