@@ -66,7 +66,7 @@
     "fast-memoize": "^2.5.1",
     "fs": "0.0.1-security",
     "path": "^0.12.7",
-    "snyk": "^1.189.0"
+    "snyk": "^1.192.0"
   },
   "husky": {
     "hooks": {
